@@ -12,6 +12,8 @@ import {
 const initialState = {
   isFetching: false,
   isAuthenticated: !!Cookies.get('id_token'),
+  errorMessage: '',
+  user: undefined,
 };
 
 const authReducer = (state = initialState, action) => {

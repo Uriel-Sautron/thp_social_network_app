@@ -19,17 +19,21 @@ const Register = () => {
   };
 
   return (
-    <div>
-      <h1>Register</h1>
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <input type="text" name="username" placeholder="Name" />
-        <input type="email" name="email" placeholder="Email" />
-        <input type="password" name="password" placeholder="Password" />
-        <button type="submit" className="btn-submit">
-          Register
-        </button>
-      </form>
-    </div>
+    <section className="section">
+      <div className="section-top">
+        <h1>Register</h1>
+      </div>
+      <div className="main-register">
+        <form onSubmit={(e) => handleSubmit(e)}>
+          <input type="text" name="username" placeholder="Name" />
+          <input type="email" name="email" placeholder="Email" />
+          <input type="password" name="password" placeholder="Password" />
+          <button type="submit" className="btn-primary">
+            Register
+          </button>
+        </form>
+      </div>
+    </section>
   );
 };
 

@@ -18,16 +18,20 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <input type="text" placeholder="Name or email" />
-        <input type="password" placeholder="Password" />
-        <button type="submit" className="btn-submit">
-          Login
-        </button>
-      </form>
-    </div>
+    <section className="section">
+      <div className="section-top">
+        <h1>Login</h1>
+      </div>
+      <div className="main-login">
+        <form onSubmit={(e) => handleSubmit(e)}>
+          <input type="text" placeholder="Name or email" />
+          <input type="password" placeholder="Password" />
+          <button type="submit" className="btn-primary">
+            Login
+          </button>
+        </form>
+      </div>
+    </section>
   );
 };
 

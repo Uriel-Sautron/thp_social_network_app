@@ -5,6 +5,12 @@ import {
   requestGetAllPost,
   receiveGetAllPost,
   getAllPostError,
+  requestGetUserPost,
+  receiveGetUserPost,
+  getUserPostError,
+  requestDelPost,
+  receiveDelPost,
+  delPostError,
 } from './postActions';
 
 export const getAllPost = () => (dispatch) => {
@@ -54,6 +60,51 @@ export const newPost = (userData) => (dispatch) => {
       } else {
         dispatch(receiveNewPost(response));
         dispatch(getAllPost());
+      }
+    });
+};
+
+export const getUserPost = (token, id) => (dispatch) => {
+  const config = {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(),
+  };
+
+  dispatch(requestGetUserPost());
+  fetch(`http://localhost:1337/posts?user.id=${id}`, config)
+    .then((response) => response.json())
+    .then((response) => {
+      if (response.statusCode) {
+        dispatch(getUserPostError(response.message));
+      } else {
+        dispatch(receiveGetUserPost(response));
+      }
+    });
+};
+
+export const delPost = (token, postId) => (dispatch) => {
+  const config = {
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(),
+  };
+
+  dispatch(requestDelPost());
+  fetch(`http://localhost:1337/posts/${postId}`, config)
+    .then((response) => response.json())
+    .then((response) => {
+      if (response.statusCode) {
+        dispatch(delPostError(response.message));
+      } else {
+        dispatch(receiveDelPost(response));
+        dispatch(getUserPost(token, response.user.id));
       }
     });
 };

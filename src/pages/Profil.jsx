@@ -1,13 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Cookies from 'js-cookie';
-import { editProfil } from '../Redux';
+import { editProfil, getUserPost, delPost } from '../Redux';
+import OtherPost from '../Components/OtherPost';
 
 const Profil = () => {
   const profilUser = useSelector((state) => state.profil.user);
+  const userPosts = useSelector((state) => state.post.otherUserPosts);
   const dispatch = useDispatch();
   const [editForm, setEditForm] = useState(false);
   const { id, username: userName, email, description } = profilUser;
+  const token = Cookies.get('id_token');
+
+  useEffect(() => {
+    dispatch(getUserPost(token, id));
+  }, [dispatch, id, token]);
 
   const handleSubmitEdit = (e) => {
     e.preventDefault();
@@ -21,24 +28,55 @@ const Profil = () => {
     setEditForm(!editForm);
   };
 
+  const handleDelPost = (e, postId) => {
+    e.preventDefault();
+    dispatch(delPost(token, postId));
+    console.log('test del');
+  };
+
   return (
-    <div>
-      <h1>Profil</h1>
-      <h2>{userName}</h2>
-      <h2>{email}</h2>
-      <button type="button" onClick={() => setEditForm(!editForm)}>
-        {editForm ? 'Close' : 'Edit'}
-      </button>
-      {editForm && (
-        <form onSubmit={(e) => handleSubmitEdit(e)}>
-          <input type="text" name="username" defaultValue={userName} />
-          <input type="text" name="description" defaultValue={description} />
-          <button type="submit" className="btn-submit">
-            Edit
-          </button>
-        </form>
-      )}
-    </div>
+    <section className="section">
+      <div className="section-top">
+        <h1>Profil</h1>
+      </div>
+      <div className="main-profil">
+        <h2>{userName}</h2>
+        <h2>{email}</h2>
+        <button
+          type="button"
+          className={editForm ? 'btn-danger' : 'btn-primary'}
+          onClick={() => setEditForm(!editForm)}
+        >
+          {editForm ? 'Close' : 'Edit profil'}
+        </button>
+        {editForm && (
+          <form onSubmit={(e) => handleSubmitEdit(e)}>
+            <input type="text" name="username" defaultValue={userName} />
+            <input type="text" name="description" defaultValue={description} />
+            <button type="submit" className="btn-primary">
+              Edit
+            </button>
+          </form>
+        )}
+        {userPosts &&
+          userPosts.map((post) => (
+            <>
+              <OtherPost
+                create={post.created_at}
+                text={post.text}
+                key={post.id}
+              />
+              <button
+                type="button"
+                className="btn-danger-small"
+                onClick={(e) => handleDelPost(e, post.id)}
+              >
+                Delete
+              </button>
+            </>
+          ))}
+      </div>
+    </section>
   );
 };
 

@@ -10,4 +10,9 @@ export {
 } from './profil/profilMiddleware';
 
 // Post
-export { newPost, getAllPost } from './post/postMiddleware';
+export {
+  newPost,
+  getAllPost,
+  getUserPost,
+  delPost,
+} from './post/postMiddleware';

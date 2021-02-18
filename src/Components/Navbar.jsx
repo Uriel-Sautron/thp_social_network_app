@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../Redux';
+import homeIcon from '../assets/images/Budgie.svg';
 
 const Navbar = () => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -14,7 +15,9 @@ const Navbar = () => {
 
   return (
     <header>
-      <h1>THP Social Network</h1>
+      <Link to="/">
+        <img src={homeIcon} alt="Piou piou" />
+      </Link>
       <ul>
         <li>
           <Link to="/">Home</Link>
@@ -36,7 +39,11 @@ const Navbar = () => {
         )}
       </ul>
       {isAuthenticated && (
-        <button type="button" onClick={() => handleLogout()}>
+        <button
+          type="button"
+          className="btn-danger"
+          onClick={() => handleLogout()}
+        >
           Logout
         </button>
       )}

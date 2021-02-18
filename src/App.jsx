@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import Navbar from './Components/Navbar';
-import './Sass/App.scss';
+import './App.scss';
 import Home from './pages/Home';
 import Profil from './pages/Profil';
 import OtherProfil from './pages/OtherProfil';
