@@ -7,9 +7,9 @@ import {
   receiveLogin,
   loginError,
 } from './authActions';
+import { userProfil } from '../profil/profilMiddleware';
 
 export const registerUser = (userData) => (dispatch) => {
-  console.log('userData:', userData);
   const config = {
     method: 'POST',
     headers: {
@@ -22,11 +22,12 @@ export const registerUser = (userData) => (dispatch) => {
   fetch('http://localhost:1337/auth/local/register', config)
     .then((response) => response.json())
     .then((response) => {
-      if (response.status === 'error') {
+      if (response.statusCode) {
         dispatch(registerError(response.message));
       } else {
-        dispatch(receiveRegister(response));
         Cookies.set('id_token', response.jwt);
+        dispatch(receiveRegister(response));
+        dispatch(userProfil(Cookies.get('id_token')));
       }
     });
 };
@@ -44,11 +45,13 @@ export const loginUser = (userData) => (dispatch) => {
   fetch(' http://localhost:1337/auth/local', config)
     .then((response) => response.json())
     .then((response) => {
-      if (response.status === 'error') {
+      console.log('response:', response);
+      if (response.statusCode) {
         dispatch(loginError(response.message));
       } else {
-        dispatch(receiveLogin(response));
         Cookies.set('id_token', response.jwt);
+        dispatch(receiveLogin(response));
+        dispatch(userProfil(Cookies.get('id_token')));
       }
     });
 };

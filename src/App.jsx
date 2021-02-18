@@ -1,37 +1,35 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import Nav from './Components/Nav';
+import { PersistGate } from 'redux-persist/integration/react';
+import Navbar from './Components/Navbar';
 import './Sass/App.scss';
 import Home from './pages/Home';
-import Profile from './pages/Profile';
+import Profil from './pages/Profil';
 import Register from './pages/auth/Register';
 import Login from './pages/auth/Login';
-import store from './Redux/store';
+import { store, persistor } from './Redux/store';
+import { PrivateRoute, PublicRoute } from './Components/PrivateRoute';
 
 function App() {
   return (
-    <Router>
-      <Provider store={store}>
-        <Nav />
-        <main>
-          <Switch>
-            <Route path="/" exact>
-              <Home />
-            </Route>
-            <Route path="/profile">
-              <Profile />
-            </Route>
-            <Route path="/register">
-              <Register />
-            </Route>
-            <Route path="/login">
-              <Login />
-            </Route>
-          </Switch>
-        </main>
-      </Provider>
-    </Router>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <Router>
+          <Navbar />
+          <main>
+            <Switch>
+              <Route path="/" exact>
+                <Home />
+              </Route>
+              <PrivateRoute path="/profil" component={Profil} />
+              <PublicRoute path="/register" component={Register} />
+              <PublicRoute path="/login" component={Login} />
+            </Switch>
+          </main>
+        </Router>
+      </PersistGate>
+    </Provider>
   );
 }
 

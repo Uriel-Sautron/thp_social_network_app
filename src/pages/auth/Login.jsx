@@ -1,9 +1,11 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { loginUser } from '../../Redux';
 
 const Login = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -12,6 +14,7 @@ const Login = () => {
       password: e.target[1].value,
     };
     dispatch(loginUser(userData));
+    history.push('/');
   };
 
   return (
