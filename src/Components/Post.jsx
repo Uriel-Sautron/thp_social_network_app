@@ -2,14 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-const Post = ({ userName, text }) => {
+const Post = ({ userName, text, postUserId }) => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
   return (
     <div className="post">
       <h2>
         {isAuthenticated ? (
-          <Link to="/profil/slugId">{userName}</Link>
+          <Link to={`/user/${postUserId}`}>{userName}</Link>
         ) : (
           <Link to="/login">John Doe</Link>
         )}

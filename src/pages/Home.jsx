@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Cookies from 'js-cookie';
 import { getAllPost, newPost } from '../Redux';
@@ -9,7 +9,6 @@ const Home = () => {
   const currentUser = useSelector((state) => state.auth.user);
   const posts = useSelector((state) => state.post.posts);
   const dispatch = useDispatch();
-  console.log('posts:', posts);
   useEffect(() => {
     dispatch(getAllPost());
   }, [dispatch]);
@@ -46,6 +45,7 @@ const Home = () => {
             <Post
               userName={post.user.username}
               text={post.text}
+              postUserId={post.user.id}
               key={post.id}
             />
           ))}

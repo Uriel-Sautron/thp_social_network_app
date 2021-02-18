@@ -6,6 +6,9 @@ import {
   requestEditProfil,
   receiveEditProfil,
   editProfilError,
+  requestOtherProfil,
+  receiveOtherProfil,
+  otherProfilError,
 } from './profilActions';
 
 export const userProfil = (token) => (dispatch) => {
@@ -53,6 +56,28 @@ export const editProfil = (user) => (dispatch) => {
         dispatch(editProfilError(response.message));
       } else {
         dispatch(receiveEditProfil(response));
+      }
+    });
+};
+
+export const otherUserProfil = (token, id) => (dispatch) => {
+  const config = {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(),
+  };
+
+  dispatch(requestOtherProfil());
+  fetch(`http://localhost:1337/users/${id}`, config)
+    .then((response) => response.json())
+    .then((response) => {
+      if (response.statusCode) {
+        dispatch(otherProfilError(response.message));
+      } else {
+        dispatch(receiveOtherProfil(response));
       }
     });
 };

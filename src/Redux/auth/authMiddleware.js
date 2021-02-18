@@ -45,7 +45,6 @@ export const loginUser = (userData) => (dispatch) => {
   fetch(' http://localhost:1337/auth/local', config)
     .then((response) => response.json())
     .then((response) => {
-      console.log('response:', response);
       if (response.statusCode) {
         dispatch(loginError(response.message));
       } else {
