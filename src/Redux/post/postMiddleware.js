@@ -23,7 +23,10 @@ export const getAllPost = () => (dispatch) => {
   };
 
   dispatch(requestGetAllPost());
-  fetch('http://localhost:1337/posts?_limit=20&_sort=created_at:desc', config)
+  fetch(
+    'https://thp-strapi-social-network.herokuapp.com/posts?_limit=20&_sort=created_at:desc',
+    config
+  )
     .then((response) => response.json())
     .then((response) => {
       if (response.statusCode) {
@@ -52,7 +55,7 @@ export const newPost = (userData) => (dispatch) => {
   };
 
   dispatch(requestNewPost());
-  fetch('http://localhost:1337/posts', config)
+  fetch('https://thp-strapi-social-network.herokuapp.com/posts', config)
     .then((response) => response.json())
     .then((response) => {
       if (response.statusCode) {
@@ -75,7 +78,10 @@ export const getUserPost = (token, id) => (dispatch) => {
   };
 
   dispatch(requestGetUserPost());
-  fetch(`http://localhost:1337/posts?user.id=${id}`, config)
+  fetch(
+    `https://thp-strapi-social-network.herokuapp.com/posts?user.id=${id}`,
+    config
+  )
     .then((response) => response.json())
     .then((response) => {
       if (response.statusCode) {
@@ -97,7 +103,10 @@ export const delPost = (token, postId) => (dispatch) => {
   };
 
   dispatch(requestDelPost());
-  fetch(`http://localhost:1337/posts/${postId}`, config)
+  fetch(
+    `https://thp-strapi-social-network.herokuapp.com/posts/${postId}`,
+    config
+  )
     .then((response) => response.json())
     .then((response) => {
       if (response.statusCode) {

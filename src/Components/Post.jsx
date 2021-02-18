@@ -12,14 +12,16 @@ const Post = ({ post }) => {
 
   return (
     <div className="post">
-      <h2>
-        {isAuthenticated ? (
-          <Link to={`/user/${userId}`}>{userName}</Link>
-        ) : (
-          <Link to="/login">John Doe</Link>
-        )}
-      </h2>
-      <span>{moment(created_at).startOf().fromNow()}</span>
+      <div className="post-top">
+        <h2>
+          {isAuthenticated ? (
+            <Link to={`/user/${userId}`}>{userName}</Link>
+          ) : (
+            <Link to="/login">John Doe</Link>
+          )}
+        </h2>
+        <span>{moment(created_at).startOf().fromNow()}</span>
+      </div>
       <p>{text}</p>
       <div className="like">
         <p>{like}</p>

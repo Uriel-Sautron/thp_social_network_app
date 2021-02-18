@@ -94,7 +94,29 @@ main {
   min-height: 100vh;
 }
 
+.post {
+  border-top: 1px solid $gray;
+}
 
+.other-post {
+  border-top: 1px solid $gray;
+  h2 {
+    color: white;
+  }
+}
+
+.post-top {
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  a {
+    color:white;
+  }
+  span{
+    font-size: 14px;
+    margin-top: 1em;
+  }
+}
 
 
 .section-top {
@@ -126,6 +148,7 @@ main {
 
 .like {
   display: flex;
+  justify-content: flex-end;
   img {
     object-fit: contain;
     margin-left: 0.5em;
@@ -135,6 +158,14 @@ main {
 
 .main-profil {
   margin: 1em 2em;
+  h2 {
+    color: white;
+  }
+}
+
+.main-profil-top {
+  display: flex;
+  justify-content: space-between;
 }
 
 .main-register {
@@ -168,7 +199,15 @@ main {
   }
 }
 
+.profil-btn {
+  margin-bottom: 1em;
+}
+
 .main-login {
+  @extend .main-register
+}
+
+.main-edit {
   @extend .main-register
 }
 

@@ -19,7 +19,10 @@ export const registerUser = (userData) => (dispatch) => {
   };
 
   dispatch(requestRegister());
-  fetch('http://localhost:1337/auth/local/register', config)
+  fetch(
+    'https://thp-strapi-social-network.herokuapp.com/auth/local/register',
+    config
+  )
     .then((response) => response.json())
     .then((response) => {
       if (response.statusCode) {
@@ -42,7 +45,7 @@ export const loginUser = (userData) => (dispatch) => {
   };
 
   dispatch(requestLogin());
-  fetch(' http://localhost:1337/auth/local', config)
+  fetch(' https://thp-strapi-social-network.herokuapp.com/auth/local', config)
     .then((response) => response.json())
     .then((response) => {
       if (response.statusCode) {

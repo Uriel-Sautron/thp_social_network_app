@@ -22,7 +22,7 @@ export const userProfil = (token) => (dispatch) => {
   };
 
   dispatch(requestProfil());
-  fetch('http://localhost:1337/users/me', config)
+  fetch('https://thp-strapi-social-network.herokuapp.com/users/me', config)
     .then((response) => response.json())
     .then((response) => {
       if (response.statusCode) {
@@ -49,7 +49,10 @@ export const editProfil = (user) => (dispatch) => {
   };
 
   dispatch(requestEditProfil());
-  fetch(`http://localhost:1337/users/${user.id}`, config)
+  fetch(
+    `https://thp-strapi-social-network.herokuapp.com/users/${user.id}`,
+    config
+  )
     .then((response) => response.json())
     .then((response) => {
       if (response.statusCode) {
@@ -71,7 +74,7 @@ export const otherUserProfil = (token, id) => (dispatch) => {
   };
 
   dispatch(requestOtherProfil());
-  fetch(`http://localhost:1337/users/${id}`, config)
+  fetch(`https://thp-strapi-social-network.herokuapp.com/users/${id}`, config)
     .then((response) => response.json())
     .then((response) => {
       if (response.statusCode) {

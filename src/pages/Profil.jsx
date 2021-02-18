@@ -40,23 +40,34 @@ const Profil = () => {
         <h1>Profil</h1>
       </div>
       <div className="main-profil">
-        <h2>{userName}</h2>
-        <h2>{email}</h2>
+        <div className="main-profil-top">
+          <h2>{userName}</h2>
+          <h3>{email}</h3>
+        </div>
+        <p>{description || 'Not description'}</p>
         <button
           type="button"
-          className={editForm ? 'btn-danger' : 'btn-primary'}
+          className={
+            editForm ? 'btn-danger profil-btn' : 'btn-primary profil-btn'
+          }
           onClick={() => setEditForm(!editForm)}
         >
-          {editForm ? 'Close' : 'Edit profil'}
+          {editForm ? 'Close' : 'Edit profil...'}
         </button>
         {editForm && (
-          <form onSubmit={(e) => handleSubmitEdit(e)}>
-            <input type="text" name="username" defaultValue={userName} />
-            <input type="text" name="description" defaultValue={description} />
-            <button type="submit" className="btn-primary">
-              Edit
-            </button>
-          </form>
+          <div className="main-edit">
+            <form onSubmit={(e) => handleSubmitEdit(e)}>
+              <input type="text" name="username" defaultValue={userName} />
+              <input
+                type="text"
+                name="description"
+                defaultValue={description}
+              />
+              <button type="submit" className="btn-primary">
+                Edit
+              </button>
+            </form>
+          </div>
         )}
         {userPosts &&
           userPosts.map((post) => (
