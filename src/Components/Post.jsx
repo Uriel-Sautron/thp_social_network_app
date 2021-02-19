@@ -14,8 +14,10 @@ const Post = ({ post }) => {
     <div className="post">
       <div className="post-top">
         <h2>
-          {isAuthenticated ? (
-            <Link to={`/user/${userId}`}>{userName}</Link>
+          {isAuthenticated && userName ? (
+            <Link to={`/user/${userId}`}>
+              {userName[0].toUpperCase() + userName.substring(1)}
+            </Link>
           ) : (
             <Link to="/login">John Doe</Link>
           )}

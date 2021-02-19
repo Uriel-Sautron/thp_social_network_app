@@ -41,7 +41,7 @@ const Profil = () => {
       </div>
       <div className="main-profil">
         <div className="main-profil-top">
-          <h2>{userName}</h2>
+          <h2>{userName[0].toUpperCase() + userName.substring(1)}</h2>
           <h3>{email}</h3>
         </div>
         <p>{description || 'Not description'}</p>
@@ -71,7 +71,7 @@ const Profil = () => {
         )}
         {userPosts &&
           userPosts.map((post) => (
-            <>
+            <div className="post-current-user">
               <OtherPost
                 create={post.created_at}
                 text={post.text}
@@ -84,7 +84,7 @@ const Profil = () => {
               >
                 Delete
               </button>
-            </>
+            </div>
           ))}
       </div>
     </section>

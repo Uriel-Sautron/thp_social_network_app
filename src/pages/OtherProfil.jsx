@@ -25,7 +25,7 @@ const OtherProfil = () => {
       </div>
       <div className="main-profil">
         <div className="main-profil-top">
-          <h2>{userName}</h2>
+          <h2>{userName[0].toUpperCase() + userName.substring(1)}</h2>
           <h3>{email}</h3>
         </div>
         <p>{description || 'Not description...'}</p>
@@ -34,6 +34,7 @@ const OtherProfil = () => {
             <OtherPost
               create={post.created_at}
               text={post.text}
+              tlike={post.like}
               key={post.id}
             />
           ))}

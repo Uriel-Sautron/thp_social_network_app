@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { getAllPost, newPost } from '../Redux';
 import Post from '../Components/Post';
@@ -13,11 +12,12 @@ const Home = () => {
   useEffect(() => {
     dispatch(getAllPost());
   }, [dispatch]);
+  const { username: userName, id } = currentUser;
 
   const handleSubmitPost = (e) => {
     e.preventDefault();
     const user = {
-      id: currentUser.id,
+      id,
       post: e.target[0].value,
       token: Cookies.get('id_token'),
     };
@@ -32,7 +32,17 @@ const Home = () => {
       </div>
       {isAuthenticated && (
         <form onSubmit={(e) => handleSubmitPost(e)} className="form-post">
-          <textarea type="text" name="username" placeholder="How are you?" />
+          <textarea
+            type="text"
+            name="username"
+            placeholder={
+              userName
+                ? `How are you ? ${
+                    userName[0].toUpperCase() + userName.substring(1)
+                  }`
+                : 'How are you?'
+            }
+          />
           <div>
             <button type="submit" className="btn-primary">
               Send
