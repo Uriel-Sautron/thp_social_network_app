@@ -34,7 +34,7 @@ const OtherProfil = () => {
             <OtherPost
               create={post.created_at}
               text={post.text}
-              tlike={post.like}
+              like={post.like}
               key={post.id}
             />
           ))}

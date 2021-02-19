@@ -12,12 +12,11 @@ const Home = () => {
   useEffect(() => {
     dispatch(getAllPost());
   }, [dispatch]);
-  const { username: userName, id } = currentUser;
 
   const handleSubmitPost = (e) => {
     e.preventDefault();
     const user = {
-      id,
+      id: currentUser.id,
       post: e.target[0].value,
       token: Cookies.get('id_token'),
     };
@@ -36,9 +35,10 @@ const Home = () => {
             type="text"
             name="username"
             placeholder={
-              userName
+              currentUser.username
                 ? `How are you ? ${
-                    userName[0].toUpperCase() + userName.substring(1)
+                    currentUser.username[0].toUpperCase() +
+                    currentUser.username.substring(1)
                   }`
                 : 'How are you?'
             }

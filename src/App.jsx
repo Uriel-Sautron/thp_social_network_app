@@ -27,6 +27,7 @@ function App() {
               <PrivateRoute path="/user/:userSlug" component={OtherProfil} />
               <PublicRoute path="/register" component={Register} />
               <PublicRoute path="/login" component={Login} />
+              <Route path="*" component={() => '404 not found'} />
             </Switch>
           </main>
         </Router>

@@ -71,11 +71,11 @@ const Profil = () => {
         )}
         {userPosts &&
           userPosts.map((post) => (
-            <div className="post-current-user">
+            <div className="post-current-user" key={post.id}>
               <OtherPost
                 create={post.created_at}
                 text={post.text}
-                key={post.id}
+                like={post.like}
               />
               <button
                 type="button"
