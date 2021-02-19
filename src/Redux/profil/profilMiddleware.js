@@ -34,6 +34,7 @@ export const userProfil = (token) => (dispatch) => {
 };
 
 export const editProfil = (user) => (dispatch) => {
+  console.log('user:', user);
   const userData = {
     username: user.name,
     description: user.description,
@@ -49,10 +50,7 @@ export const editProfil = (user) => (dispatch) => {
   };
 
   dispatch(requestEditProfil());
-  fetch(
-    `https://thp-strapi-social-network.herokuapp.com/users/${user.id}`,
-    config
-  )
+  fetch(`https://thp-strapi-social-network.herokuapp.com/users/me`, config)
     .then((response) => response.json())
     .then((response) => {
       if (response.statusCode) {
