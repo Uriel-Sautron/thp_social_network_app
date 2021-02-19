@@ -34,7 +34,11 @@ const OtherProfil = () => {
           )}
           <h3>{otherUser ? otherUser.email : 'Not Email...'}</h3>
         </div>
-        <p>{otherUser ? otherUser.description : 'Not description...'}</p>
+        <p>
+          {otherUser
+            ? otherUser.description || 'Not description...'
+            : 'Not description...'}
+        </p>
         {otherUserPosts &&
           otherUserPosts.map((post) => (
             <OtherPost
