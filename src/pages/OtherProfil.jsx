@@ -32,7 +32,7 @@ const OtherProfil = () => {
           ) : (
             <h2>John Doe</h2>
           )}
-          <h3>{otherUser.email || 'Not Email...'}</h3>
+          <h3>{otherUser ? otherUser.email : 'Not Email...'}</h3>
         </div>
         <p>{otherUser.description || 'Not description...'}</p>
         {otherUserPosts &&
